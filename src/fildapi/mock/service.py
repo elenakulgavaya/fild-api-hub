@@ -150,7 +150,7 @@ class MockServer:
         except TimeoutExpired:
             return None
 
-    def verify_all_mocks_called(self, timeout_seconds=1):
+    def verify_all_mocks_called(self, timeout_seconds=1):  # pylint:disable=inconsistent-return-statements
         try:
             return waiting.wait(
                 lambda: not self.get_unaddressed_requests(),

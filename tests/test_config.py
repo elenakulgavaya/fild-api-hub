@@ -85,4 +85,3 @@ def test_get_with_default():
 
 def test_get_existing_key():
     assert Cfg.App.get('url') == 'test_url'
-

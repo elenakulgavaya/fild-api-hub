@@ -1,5 +1,8 @@
 name: Tests
 
+permissions:
+  pull-requests: write
+
 on:
   push:
     branches: [ main ]
@@ -11,6 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    - name: Hack setup-python cache
+      if: hashFiles('**/requirements.txt', '**/pyproject.toml') == ''
+      run: |
+        touch ./requirements.txt
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
