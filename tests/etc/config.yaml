@@ -1,0 +1,9 @@
+App:
+  url: 'test_url'
+MockServer:
+  host: mockserver
+  port: 8080
+Section:
+  sub_sec:
+    string_value: 'temp'
+    int_value: 1

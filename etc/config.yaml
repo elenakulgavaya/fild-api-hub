@@ -1,0 +1,5 @@
+App:
+  url: http://localhost:9000
+MockServer:
+  host: localhost
+  port: 8088
