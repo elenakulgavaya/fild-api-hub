@@ -4,7 +4,7 @@ from fild.sdk import Dictionary
 from requests import Response
 
 from fildapi import ApiCaller
-from tests.data.dummy_api import CheckCall, CheckParamsCall, PathParams
+from tests.data.dummy_api import CheckCall
 
 
 class CheckCallCaller(ApiCaller):
@@ -29,7 +29,7 @@ def test_verify_response_body():
     caller = CheckCallCaller()
     caller.response = Response()
     caller.response.status_code = 200
-    caller.response._content = str.encode(json.dumps({}))
+    caller.response._content = str.encode(json.dumps({}))  # pylint: disable=protected-access
     caller.verify_response(resp_body=Dictionary())
 
 
@@ -38,7 +38,7 @@ def test_verify_response_text():
     caller.response = Response()
     caller.response.status_code = 200
     caller.response.headers = {'Content-Type': 'text/csv'}
-    caller.response._content = str.encode('test')
+    caller.response._content = str.encode('test')  # pylint: disable=protected-access
     caller.verify_response(
         resp_body='test_parsed',
         parse_response=lambda x: f'{x}_parsed',

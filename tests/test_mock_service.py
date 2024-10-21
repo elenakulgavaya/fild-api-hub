@@ -1,5 +1,4 @@
 import os
-import re
 
 import pytest
 
@@ -7,9 +6,7 @@ from fildapi import MockServer
 from fildapi.config import Cfg
 from fildapi.mock import service
 from fildapi.mock.data import (
-    Command, ExpectationBody, JsonFilter, HttpRequest, HttpResponse,
-    MatchType, RetrieveBody, RetrieveHttpRequest, PathParams, StringFilter,
-    Times, UnaddressedRequest,
+    Command, HttpRequest, PathParams, UnaddressedRequest
 )
 from fildapi.mock.service import RunCommand
 
@@ -23,7 +20,7 @@ def reset_config():
     Cfg.initialize()
 
 
-def test_no_url(reset_config):
+def test_no_url(reset_config):  # pylint: disable=unused-argument,redefined-outer-name
     assert service.get_mockserver_url() is None
 
 

@@ -1,16 +1,8 @@
 import re
 
 import pytest
-from fild.sdk import Dictionary
 
 from fildapi.deepdiff import compare_data
-from fildapi.mock.data import (
-    Command, ExpectationBody, JsonFilter,  HttpRequest, HttpResponse,
-    MatchType, RetrieveBody, RetrieveHttpRequest, PathParams, StringFilter,
-    Times,
-)
-from fildapi.mock.service import RunCommand
-from tests.data.dummy_api import CheckCall, CheckCallReq
 
 
 def test_compare_data():

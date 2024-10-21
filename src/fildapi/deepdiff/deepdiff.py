@@ -200,7 +200,7 @@ class DeepDiff(dict):
             del self[k]
 
     @staticmethod
-    def __extend_result_list(keys, parent, result_obj, print_as_attribute=False):
+    def __extend_result_list(keys, parent, result_obj, print_as_attribute=False):  # pylint: disable=unused-argument
         key_text = f'{INDEX_VS_ATTRIBUTE[print_as_attribute]}{{}}'
 
         for i in keys:
