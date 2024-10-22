@@ -1,5 +1,6 @@
 [build-system]
 requires = [
+    "setuptools>=42",
     "deepdiff==8.0.1",
     "fild==0.0.9",
     "requests==2.32.3",
