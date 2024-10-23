@@ -6,6 +6,13 @@ from fild.sdk import Dictionary, Enum
 from fildapi.config import Cfg
 
 
+def get_default_app_url():
+    if 'App' in Cfg:
+        return Cfg.App.get('url')
+
+    return None
+
+
 class HttpMethod(Enum):
     POST = 'POST'
     GET = 'GET'
@@ -45,7 +52,7 @@ class Schema:
     @classmethod
     def get_base_url(cls):
         parent_module = inspect.getmodule(cls)
-        return getattr(parent_module, 'BASE_URL', Cfg.get('App').get('url'))
+        return getattr(parent_module, 'BASE_URL', get_default_app_url())
 
     @classmethod
     def get_api_base_url(cls):
@@ -62,7 +69,7 @@ class Schema:
     @classmethod
     def fe_headers(cls, app_url=None, content_type=None, set_cookie=None):
         return exclude_none_from_kwargs({
-            'Access-Control-Allow-Origin': app_url or Cfg.get('App').get('url'),
+            'Access-Control-Allow-Origin': app_url or get_default_app_url(),
             'Access-Control-Allow-Credentials': 'true',
             'Content-Type': content_type,
             'Set-Cookie': set_cookie,
