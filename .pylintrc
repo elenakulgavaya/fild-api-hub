@@ -31,7 +31,7 @@ good-names=i,
            _
 
 [DESIGN]
-max-args=13
+max-args=14
 max-attributes=7
 max-bool-expr=5
 max-branches=19
