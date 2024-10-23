@@ -45,7 +45,7 @@ class Schema:
     @classmethod
     def get_base_url(cls):
         parent_module = inspect.getmodule(cls)
-        return getattr(parent_module, 'BASE_URL', Cfg.App.url)
+        return getattr(parent_module, 'BASE_URL', Cfg.get('App').get('url'))
 
     @classmethod
     def get_api_base_url(cls):
@@ -62,7 +62,7 @@ class Schema:
     @classmethod
     def fe_headers(cls, app_url=None, content_type=None, set_cookie=None):
         return exclude_none_from_kwargs({
-            'Access-Control-Allow-Origin': app_url or Cfg.App.url,
+            'Access-Control-Allow-Origin': app_url or Cfg.get('App').get('url'),
             'Access-Control-Allow-Credentials': 'true',
             'Content-Type': content_type,
             'Set-Cookie': set_cookie,
