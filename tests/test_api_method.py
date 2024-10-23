@@ -1,5 +1,6 @@
 from fild.sdk import Dictionary
 
+from fildapi.config import Cfg
 from fildapi.mock.data import (
     Command, ExpectationBody, JsonFilter,  HttpRequest, HttpResponse,
     MatchType, RetrieveBody, RetrieveHttpRequest, PathParams, StringFilter,
@@ -130,6 +131,37 @@ def test_reply_with_substr_filter_no_prefix(requests_mock):
         ExpectationBody.HttpResponse.name: {
             HttpResponse.Body.name: '{}',
             HttpResponse.Headers.name: {'Content-Type': 'application/json'},
+            HttpResponse.StatusCode.name: 200,
+        },
+        ExpectationBody.Times.name: {
+            Times.RemainingTimes.name: 1,
+            Times.Unlimited.name: False,
+        }
+    }).value
+
+
+def test_reply_with_default_headers(requests_mock):
+    requests_mock.put(RunCommand.get_request_url(
+        path_params=PathParams().with_values({
+            PathParams.Command: Command.Expectation
+        })
+    ))
+    CheckCall.reply(default_headers=True)
+
+    assert requests_mock.last_request.json() == ExpectationBody().with_values({
+        ExpectationBody.HttpRequest.name: {
+            HttpRequest.Method.name: CheckCall.method,
+            HttpRequest.Path.name: (
+                f'/mockserver/{CheckCall.get_service_name()}'
+                f'{CheckCall.get_relative_url()}'
+            ),
+        },
+        ExpectationBody.HttpResponse.name: {
+            HttpResponse.Body.name: '{}',
+            HttpResponse.Headers.name: {
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Origin': Cfg.App.url
+            },
             HttpResponse.StatusCode.name: 200,
         },
         ExpectationBody.Times.name: {

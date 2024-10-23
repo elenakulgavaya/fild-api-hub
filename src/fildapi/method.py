@@ -43,9 +43,14 @@ class ApiMethod(Schema):
     @classmethod
     def reply(cls, path_params=None, params=None, req_body=None, body=None,
               status=200, reset=False, cookies=None, headers=None, times=1,
-              no_prefix=False, substr_filter=None, strict=False):
+              no_prefix=False, substr_filter=None, strict=False,
+              default_headers=False):
         from fildapi.mock.service import MockServer   # pylint: disable=cyclic-import
         reply_body = body
+
+        if default_headers and headers is None:
+            headers = cls.fe_headers()
+
         headers = headers or {'Content-Type': 'application/json',}
 
         if reply_body is None:
