@@ -37,6 +37,7 @@ def test_get_fe_headers():
     assert CheckCall.fe_headers() == {
         'Access-Control-Allow-Origin': 'http://localhost:9000',
         'Access-Control-Allow-Credentials': 'true',
+        'Content-Type': 'application/json'
     }
 
 

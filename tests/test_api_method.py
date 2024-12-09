@@ -161,7 +161,8 @@ def test_reply_with_default_headers(requests_mock):
             HttpResponse.Body.name: '{}',
             HttpResponse.Headers.name: {
                 'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': Cfg.App.url
+                'Access-Control-Allow-Origin': Cfg.App.url,
+                'Content-Type': 'application/json'
             },
             HttpResponse.StatusCode.name: 200,
         },
