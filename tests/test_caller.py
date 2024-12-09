@@ -44,3 +44,11 @@ def test_verify_response_text():
         parse_response=lambda x: f'{x}_parsed',
         normalize=True
     )
+
+
+def test_request_updates(requests_mock):
+    requests_mock.post(CheckCall.get_request_url(), json={})
+    updates = {'test_key': 'test_value'}
+    CheckCallCaller(updates=updates).request()
+
+    assert requests_mock.last_request.json() == updates
