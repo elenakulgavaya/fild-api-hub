@@ -9,13 +9,14 @@ class ApiCaller:
     method: ApiMethod
 
     def __init__(self, req_body=None, path_params=None, headers=None,
-                 params=None, cookies=None):
+                 params=None, cookies=None, updates=None):
         self.req_body = req_body
         self.response = None
         self.path_params = path_params
         self.headers = headers
         self.params = params
         self.cookies = cookies
+        self.updates = updates
 
     def request(self):
         req_body = self.req_body
@@ -25,6 +26,9 @@ class ApiCaller:
             pass
         elif isinstance(self.req_body, Field):
             req_body = self.req_body.value
+
+        if self.updates:
+            req_body = dictionary.merge_with_updates(req_body, self.updates)
 
         if params is None:
             pass

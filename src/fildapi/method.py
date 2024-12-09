@@ -7,7 +7,7 @@ from fild.sdk import Field
 
 from fildapi.deepdiff import compare_data
 from fildapi.mock.data import JsonFilter, MatchType, StringFilter
-from fildapi.schema import Schema
+from fildapi.schema import Schema, HttpMethod
 
 
 class ApiMethod(Schema):
@@ -87,6 +87,30 @@ class ApiMethod(Schema):
             headers=headers or {},
             cookies=cookies,
             times=times
+        )
+
+    @classmethod
+    def reply_corse_options(cls, allow_headers, reset=False, no_prefix=False,
+                            path_params=None, params=None, req_body=None):
+        from fildapi.mock.service import MockServer   # pylint: disable=cyclic-import
+        headers = cls.fe_headers(
+            content_type='Access-Control-Allow-Headers',
+        )
+        headers['Access-Control-Allow-Headers'] = ','.join(allow_headers)
+
+        if no_prefix:
+            prefix = ''
+        else:
+            prefix = f'/mockserver/{cls.get_service_name()}'
+
+        return MockServer().reply(
+            method=HttpMethod.OPTIONS,
+            url=f'{prefix}{cls.get_relative_url(path_params)}',
+            params=params,
+            req_body=req_body,
+            body=None,
+            reset=reset,
+            headers=headers
         )
 
     @classmethod
