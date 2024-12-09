@@ -205,6 +205,37 @@ def test_reply_with_corse_options(requests_mock):
     }).value
 
 
+def test_reply_with_corse_options_no_prefix(requests_mock):
+    requests_mock.put(RunCommand.get_request_url(
+        path_params=PathParams().with_values({
+            PathParams.Command: Command.Expectation
+        })
+    ))
+    CheckCall.reply_corse_options(
+        allow_headers=['first', 'second'], no_prefix=True
+    )
+
+    assert requests_mock.last_request.json() == ExpectationBody().with_values({
+        ExpectationBody.HttpRequest.name: {
+            HttpRequest.Method.name: HttpMethod.OPTIONS,
+            HttpRequest.Path.name: CheckCall.get_relative_url()
+        },
+        ExpectationBody.HttpResponse.name: {
+            HttpResponse.Headers.name: {
+                'Access-Control-Allow-Credentials': 'true',
+                'Access-Control-Allow-Headers': 'first,second',
+                'Access-Control-Allow-Origin': Cfg.App.url,
+                'Content-Type': 'Access-Control-Allow-Headers'
+            },
+            HttpResponse.StatusCode.name: 200,
+        },
+        ExpectationBody.Times.name: {
+            Times.RemainingTimes.name: 1,
+            Times.Unlimited.name: False,
+        }
+    }).value
+
+
 def test_verify_called(requests_mock):
     requests_mock.put(RunCommand.get_request_url(
         path_params=PathParams().with_values({
