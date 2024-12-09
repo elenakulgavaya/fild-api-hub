@@ -21,6 +21,7 @@ class HttpMethod(Enum):
     DELETE = 'DELETE'
     PUT = 'PUT'
     TRACE = 'TRACE'
+    OPTIONS = 'OPTIONS'
 
 
 class Schema:
@@ -67,7 +68,8 @@ class Schema:
         )
 
     @classmethod
-    def fe_headers(cls, app_url=None, content_type=None, set_cookie=None):
+    def fe_headers(cls, app_url=None, content_type='application/json',
+                   set_cookie=None):
         return exclude_none_from_kwargs({
             'Access-Control-Allow-Origin': app_url or get_default_app_url(),
             'Access-Control-Allow-Credentials': 'true',
