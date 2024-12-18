@@ -1,5 +1,7 @@
 deepdiff==8.0.1
-fild==0.0.9
+fild==0.1.1
+fild-cfg==0.0.1
+fild-compare==0.0.3
 requests==2.32.3
 pyyaml==6.0.2
 waiting==1.5.0

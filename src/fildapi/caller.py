@@ -1,7 +1,7 @@
 from fild.process import dictionary
 from fild.sdk import Field
+from fild_compare import compare
 
-from fildapi.deepdiff import compare_data
 from fildapi.method import ApiMethod
 
 
@@ -46,8 +46,7 @@ class ApiCaller:
         return self
 
     def verify_response(self, error_code=None, resp_body=None, normalize=False,
-                        normalize_keys=None, parse_response=None,
-                        ignore_order=None, rules=None):
+                        normalize_keys=None, parse_response=None, rules=None):
         if error_code:
             assert self.response.status_code == error_code, (
                 f'Unexpected code: {self.response.status_code}\n'
@@ -76,10 +75,9 @@ class ApiCaller:
             if normalize or normalize_keys:
                 resp_body = dictionary.normalize(resp_body, result_data, keys=normalize_keys)
 
-            compare_data(
-                expected_data=resp_body,
-                actual_data=result_data,
-                ignore_order=ignore_order,
+            compare(
+                expected=resp_body,
+                actual=result_data,
                 rules=rules,
                 target_name='api response'
             )

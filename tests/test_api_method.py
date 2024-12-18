@@ -1,7 +1,7 @@
 from fild.sdk import Dictionary
+from fild_cfg import Cfg
 
 from fildapi import HttpMethod
-from fildapi.config import Cfg
 from fildapi.mock.data import (
     Command, ExpectationBody, JsonFilter,  HttpRequest, HttpResponse,
     MatchType, RetrieveBody, RetrieveHttpRequest, PathParams, StringFilter,

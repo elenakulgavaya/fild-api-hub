@@ -4,8 +4,8 @@ import requests
 
 from fild.process import dictionary
 from fild.sdk import Field
+from fild_compare import compare
 
-from fildapi.deepdiff import compare_data
 from fildapi.mock.data import JsonFilter, MatchType, StringFilter
 from fildapi.schema import Schema, HttpMethod
 
@@ -145,9 +145,9 @@ class ApiMethod(Schema):
             actual_value = dictionary.normalize(
                 actual_value, expected_value, keys=normalize_keys
             )
-        compare_data(
-            actual_data=actual_value,
-            expected_data=expected_value,
+        compare(
+            actual=actual_value,
+            expected=expected_value,
             rules=rules or None,
             target_name='api request'
         )
@@ -158,9 +158,9 @@ class ApiMethod(Schema):
             for key in headers:
                 filtered_headers[key] = actual_headers.get(key)
 
-            compare_data(
-                actual_data=filtered_headers,
-                expected_data=headers,
+            compare(
+                actual=filtered_headers,
+                expected=headers,
                 rules=header_rules or None,
                 target_name='api request headers'
             )
@@ -168,8 +168,8 @@ class ApiMethod(Schema):
         #FIXME parse into object + verify all together
 
         if params:
-            compare_data(
-                actual_data=actual_params,
-                expected_data=params,
+            compare(
+                actual=actual_params,
+                expected=params,
                 target_name='api request params'
             )
