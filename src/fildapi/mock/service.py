@@ -1,10 +1,10 @@
 import waiting
 
 from fild.sdk import Field
+from fild_cfg import Cfg
 from waiting.exceptions import TimeoutExpired
 
 from fildapi.caller import ApiCaller
-from fildapi.config import Cfg
 from fildapi.method import ApiMethod
 from fildapi.mock.data import (
     Command, ExpectationBody, HttpRequest, HttpResponse, ObjectType, Params,

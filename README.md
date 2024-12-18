@@ -1,4 +1,9 @@
-# fild-api-hub
+# fild-api-hub v 0.0.5
+
+![Downloads](https://img.shields.io/pypi/dm/fild-api-hub.svg?style=flat)
+![Python Versions](https://img.shields.io/pypi/pyversions/fild-api-hub.svg?style=flat)
+![License](https://img.shields.io/pypi/l/fild-api-hub.svg?version=latest)
+[![Build Status](https://github.com/elenakulgavaya/fild-api-hub/workflows/Tests/badge.svg)](https://github.com/elenakulgavaya/fild-api-hub/actions)
 
 The FILD Api Hub is a set of tools enabling using FILD described contracts
 in tests. 

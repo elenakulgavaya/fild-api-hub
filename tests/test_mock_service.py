@@ -2,8 +2,9 @@ import os
 
 import pytest
 
+from fild_cfg import Cfg
+
 from fildapi import MockServer
-from fildapi.config import Cfg
 from fildapi.mock import service
 from fildapi.mock.data import (
     Command, HttpRequest, PathParams, UnaddressedRequest

@@ -2,7 +2,8 @@ import os
 
 import pytest
 
-from fildapi.config import Cfg
+from fild_cfg import Cfg
+
 from fildapi.schema import get_default_app_url
 
 

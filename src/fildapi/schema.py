@@ -1,9 +1,10 @@
 import inspect
 
+from urllib.parse import urljoin
+
 from fild.process.common import exclude_none_from_kwargs
 from fild.sdk import Dictionary, Enum
-
-from fildapi.config import Cfg
+from fild_cfg import Cfg
 
 
 def get_default_app_url():
@@ -43,7 +44,7 @@ class Schema:
     def get_relative_url(cls, path_params=None):
         path_params = path_params or cls.path_params()
         formatted_url = cls.url.format(**path_params.value)
-        return f'/{cls.get_api_base_url()}{formatted_url}'
+        return f'{cls.get_api_base_url()}{formatted_url}'
 
     @classmethod
     def get_service_name(cls):
@@ -62,8 +63,8 @@ class Schema:
 
     @classmethod
     def get_request_url(cls, path_params=None):
-        return (
-            f'{cls.get_base_url()}'
+        return urljoin(
+            f'{cls.get_base_url()}',
             f'{cls.get_relative_url(path_params=path_params)}'
         )
 
