@@ -2,7 +2,7 @@ from tests.data.dummy_api import CheckCall, CheckParamsCall, PathParams
 
 
 def test_schema_relative_url():
-    assert CheckCall.get_relative_url() == '/dummyurl/api/check_call'
+    assert CheckCall.get_relative_url() == 'dummyurl/api/check_call'
 
 
 def test_schema_relative_parametrized_url():
@@ -12,7 +12,7 @@ def test_schema_relative_parametrized_url():
             PathParams.Param.name: 'temp'
         })
     )
-    assert url == '/dummyurl/api/1/get/temp'
+    assert url == 'dummyurl/api/1/get/temp'
 
 
 def test_get_service_name():
