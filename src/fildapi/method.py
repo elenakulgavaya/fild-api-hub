@@ -56,7 +56,7 @@ class ApiMethod(Schema):
         if reply_body is None:
             reply_body = cls.resp_body and cls.resp_body() # pylint: disable=not-callable
 
-        if reply_body not in [None, {}, '']:
+        if reply_body not in [None, {}, ''] and isinstance(reply_body, Field):
             reply_body = reply_body.value
             reply_body = json.dumps(reply_body)
 
