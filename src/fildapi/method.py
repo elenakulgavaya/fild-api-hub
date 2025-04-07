@@ -116,7 +116,8 @@ class ApiMethod(Schema):
     @classmethod
     def verify_called(cls, expected=None, normalize=False, normalize_keys=None,
                       path_params=None, timeout=None, body=None, headers=None,
-                      latest=False, params=None, rules=None, header_rules=None):
+                      latest=False, params=None, rules=None, header_rules=None,
+                      params_rules=None):
         from fildapi.mock.service import MockServer  # pylint: disable=cyclic-import
 
         expected_value = expected
@@ -171,5 +172,6 @@ class ApiMethod(Schema):
             compare(
                 actual=actual_params,
                 expected=params,
+                rules=params_rules,
                 target_name='api request params'
             )
