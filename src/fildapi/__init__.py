@@ -1,5 +1,6 @@
 import warnings
 
+# pylint: disable=wrong-import-position
 warnings.warn(
     "fild-api-hub is deprecated and will no longer be maintained. "
     "Migrate to surety-api: pip install surety-api. "
