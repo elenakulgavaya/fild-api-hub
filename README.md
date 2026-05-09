@@ -1,3 +1,11 @@
+> **DEPRECATED** — This package is no longer maintained.
+> Migrate to [surety-api](https://github.com/elenakulgavaya/surety-api):
+> `pip install surety-api`
+>
+> Replace `from fildapi import ApiCaller, ApiMethod, MockServer, HttpMethod`
+> with `from surety.api import ApiCaller, ApiContract, MockServer, HttpMethod`.
+> Note: `ApiMethod` was renamed to `ApiContract` in `surety-api`.
+
 # fild-api-hub v 0.0.8
 
 ![Downloads](https://img.shields.io/pypi/dm/fild-api-hub.svg?style=flat)
